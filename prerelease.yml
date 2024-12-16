@@ -1,0 +1,38 @@
+name: Release & Publish to NPM
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "An existing git tag for the release e.g. v0.0.0"
+        required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Use Node.js 18.16.1
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.1
+      - name: Install the dependencies
+        run: npm ci
+      - name: Build package
+        run: npm run build
+      - name: Initialise the NPM config
+        run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
+      - name: Initialize Git user
+        run: |
+          git config --global user.name "Release workflow"
+          git config --global user.email ${{ secrets.GITHUB_EMAIL_ADDRESS }}
+      - name: Log git status
+        run: git status
+      - name: Run release
+        run: npm run release --ci
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_PAT }}
