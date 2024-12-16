@@ -25,11 +25,12 @@ jobs:
         run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
         env:
           NPM_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
-          PERSONAL_GITHUB_EMAIL_ADDRESS: ${{ secrets.PERSONAL_GITHUB_EMAIL_ADDRESS }}
       - name: Initialize Git user
         run: |
           git config --global user.name "Release workflow"
           git config --global user.email $PERSONAL_GITHUB_EMAIL_ADDRESS
+        env:
+          PERSONAL_GITHUB_EMAIL_ADDRESS: ${{ secrets.PERSONAL_GITHUB_EMAIL_ADDRESS }}
       - name: Log git status
         run: git status
       - name: Run release
