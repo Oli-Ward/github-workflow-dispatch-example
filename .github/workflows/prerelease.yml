@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "An existing git tag for the release e.g. v0.0.0"
+        description: "A git tag for the release e.g. v0.0.0"
         required: true
 
 jobs:
@@ -25,17 +25,14 @@ jobs:
         run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
         env:
           NPM_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
       - name: Initialize Git user
         run: |
               git config --global user.name "${GITHUB_ACTOR}"
               git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-        env:
-          PERSONAL_GITHUB_EMAIL_ADDRESS: ${{ secrets.PERSONAL_GITHUB_EMAIL_ADDRESS }}
       - name: Log git status
         run: git status
       - name: Run release
         run: npm run release --ci
         env:
           NPM_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_PAT }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
