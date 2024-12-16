@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  improv:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9994:9994"
+    network_mode: "host"
