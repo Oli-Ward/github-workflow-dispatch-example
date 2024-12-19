@@ -25,6 +25,8 @@ jobs:
         run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
         env:
           NPM_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
+      - name: Print Git user
+        run: echo "GITHUB_ACTOR=${GITHUB_ACTOR}"
       - name: Initialize Git user
         run: |
               git config --global user.name "${GITHUB_ACTOR}"
