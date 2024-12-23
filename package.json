@@ -1,6 +1,6 @@
 {
   "name": "github-workflow-dispatch-example",
-  "version": "1.1.0",
+  "version": "1.0.9",
   "description": "Repo to test out github workflows",
   "main": "src/index.ts",
   "scripts": {
@@ -35,7 +35,6 @@
   "release-it": {
     "$schema": "https://unpkg.com/release-it/schema/release-it.json",
     "git": {
-      "tagName": "v${version}",
       "commitMessage": "chore: release) v${version}",
       "requireBranch": "main"
     },
@@ -47,8 +46,7 @@
       "after:bump": "npx auto-changelog -p"
     },
     "github": {
-      "release": true,
-      "releaseName": "v${version}"
+      "release": true
     },
     "npm": {
       "publish": true
