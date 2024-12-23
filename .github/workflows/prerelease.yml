@@ -32,5 +32,4 @@ jobs:
       - name: Run release
         run: npm run release --ci
         env:
-          NPM_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
