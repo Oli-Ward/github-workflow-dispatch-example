@@ -1,6 +1,6 @@
 {
   "name": "github-workflow-dispatch-example",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "Repo to test out github workflows",
   "main": "src/index.ts",
   "scripts": {
@@ -48,7 +48,8 @@
     },
     "github": {
       "release": true,
-      "releaseName": "v${version}"
+      "releaseName": "v${version}",
+      "tokenRef" : "APP_GITHUB_TOKEN"
     },
     "npm": {
       "publish": true

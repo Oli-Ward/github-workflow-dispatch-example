@@ -49,4 +49,4 @@ jobs:
         run: npm run release --ci
         env:
           NPM_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+          APP_GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
