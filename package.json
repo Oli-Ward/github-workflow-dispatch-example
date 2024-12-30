@@ -1,6 +1,6 @@
 {
   "name": "github-workflow-dispatch-example",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "Repo to test out github workflows",
   "main": "src/index.ts",
   "scripts": {
