@@ -35,11 +35,18 @@ jobs:
               git config --global user.name "${GITHUB_ACTOR}"
               git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
+      - name: Generate a token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_KEY }}
+
       - name: Log git status
         run: git status
-        
+
       - name: Run release
         run: npm run release --ci
         env:
           NPM_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
